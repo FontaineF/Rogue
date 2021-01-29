@@ -51,8 +51,8 @@ class Enemy : public Alive{
             }
 
             if(c=='z'){                  //Zombie: enemi basique
-                this->Hits = 6;
-                this->max_Hits = 6;
+                this->Hits = 8;
+                this->max_Hits = 8;
                 this->Str = 3;
                 this->Armor = 0;
             }
@@ -61,7 +61,7 @@ class Enemy : public Alive{
                 this->Hits = 15;
                 this->max_Hits = 15;
                 this->Str = 5;
-                this->Armor = 3;
+                this->Armor = 1;
             } 
         }
 };
@@ -80,10 +80,10 @@ class Hero : public Alive
     void initialiser(){
             char c;
             c = this->Name;
-            if(c=='b'){                  //Barbare : Force haute mais peu de PV
-                this->Hits = 7;
-                this->max_Hits = 7;
-                this->Str = 7;
+            if(c=='b'){                  //Bandit : Treès faible
+                this->Hits = 5;
+                this->max_Hits = 5;
+                this->Str = 3;
                 this->Armor = 0;
             }
 
@@ -97,7 +97,7 @@ class Hero : public Alive
             if(c=='g'){                  //Geant : Force faible mais PV eleve
                 this->Hits = 20;
                 this->max_Hits = 20;
-                this->Str = 3;
+                this->Str = 6;
                 this->Armor = 0;
             }
         }

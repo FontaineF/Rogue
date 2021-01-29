@@ -420,11 +420,11 @@ void print_char_error_message(char c, Alive& hero) {
   msg += "' is not an action !";
   print_message(msg.c_str(), hero, RED);
 }
-void play () {
+void play (char classe) {
   // On initialise le terminal en ncurses.
   init();
 
-  Hero hero('g');
+  Hero hero(classe);
   hero.initialiser();
 
   Enemy serpent('s',15,15);
@@ -506,6 +506,12 @@ void play () {
 
 // et le main
 int main () {
-  play();
+
+  std::cout << "Choose your class" << std::endl;
+  std::cout << "  ->  ";
+  
+  char classe;
+  std::cin >> classe;
+  play(classe);
   return 0;
 }
