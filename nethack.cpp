@@ -385,6 +385,8 @@ void bagarre(Hero& heros, Enemy& mechant){
             heros.prendre_un_coup(mechant);
         }
     }
+    if(mechant.Hits ==0){affiche(mechant.Pos_x, mechant.Pos_y, step);
+  }
 }
 
 void affrontement(Hero& h, Enemy& e){
