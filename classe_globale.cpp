@@ -29,6 +29,8 @@ class Alive{
             int damage_taken=opponent.Str-this->Armor;
             if (damage_taken>0){Hits=Hits-damage_taken;}
         };
+
+        
 };
 
 class Enemy : public Alive{

@@ -396,7 +396,7 @@ void affrontement(Hero& h, Enemy& e){
     int diff_x = x_h - x_e;
     int diff_y = y_h - y_e;
 
-    if((diff_x==0 and (-1 < diff_y < 1)) or (diff_y==0 and (-1 < diff_x < 1))){
+    if((diff_x==0 and (diff_y * diff_y < 1)) or (diff_y==0 and (diff_x * diff_x < 1))){
         bagarre(h,e);
     }
 
@@ -422,11 +422,15 @@ void play () {
   // On initialise le terminal en ncurses.
   init();
 
-  Hero hero;
+  Hero hero('g');
+  hero.initialiser();
 
   Enemy serpent('s',15,15);
+  serpent.initialiser();
   Enemy zombie('z', 12,26);
+  zombie.initialiser();
   Enemy vampire('v',5,47);
+  vampire.initialiser();
   std::vector<Enemy> entites{serpent,zombie,vampire};
 
 
@@ -455,18 +459,22 @@ void play () {
     if (is_direction(c)) {
       // Si le caractère est une direction en bouge le héro.
       move(c, hero);
-      /*
+      
       for(Enemy e : entites){
-        affrontement(hero,e);
-        if(hero.Hits < 1){
-          print_message("Vous êtes mort.", hero);
+        if(e.Hits>0){
+          affrontement(hero,e);
+          if(hero.Hits < 1){
+            print_message("Vous êtes mort.", hero);
+          }
         }
       }
       for(Enemy e : entites){
-        move_mechant(hero,e);
-        affrontement(hero,e);
+        if(e.Hits>0){
+          move_mechant(hero,e);
+          affrontement(hero,e);
+        }
       }
-      */
+      
     } else {
       // Et là le caractère peut être des tas d'autres choses !
       // monstres qu'il faut combattre, objet magique qu'il faut
