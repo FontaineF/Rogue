@@ -18,7 +18,9 @@ class Hero : public Alive
     int Gold;
 };
 
+/*
 int main(){
     Hero Hero1();
     return 0;
 }
+*/

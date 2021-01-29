@@ -1,7 +1,10 @@
 #include<iostream>
 
+#ifndef ALIVE
+#define ALIVE
+
 class Alive{
-    protected:
+    public:
         char Name;
         int Hits;
         int max_Hits;
@@ -10,7 +13,7 @@ class Alive{
         int Pos_x;
         int Pos_y;
 
-    public:
+    //public:
 
         void move_right(){
             Pos_x++;
@@ -30,3 +33,5 @@ class Alive{
             if (damage_taken>0){Hits=Hits-damage_taken;}
         };
 };
+
+#endif
