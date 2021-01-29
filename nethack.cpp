@@ -465,6 +465,9 @@ void play () {
           affrontement(hero,e);
           if(hero.Hits < 1){
             print_message("Vous êtes mort.", hero);
+          delete white_line;
+          endwin();
+          exit(1);
           }
         }
       }
