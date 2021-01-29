@@ -321,11 +321,11 @@ int la_chasse(Hero hero, Enemy ennemi){
     int y=hero.Pos_y - ennemi.Pos_y;
     if (x*x>y*y){
         if (x<0){return 4;}
-        else {return 5;}
+        else {return 6;}
 
     }
     else {
-        if (y<0){return 3;}
+        if (y<0){return 8;}
         else{return 2;} 
     }
 
@@ -341,7 +341,7 @@ void move_mechant (Hero& hero,Enemy& mechant) {
   int color = BLACK;
   int c=la_chasse(hero,mechant);
 
-  if (c == 5) {
+  if (c == 4) {
     
     if (mechant.Pos_y != window_left) {
       // le mouvement est possible
@@ -349,14 +349,14 @@ void move_mechant (Hero& hero,Enemy& mechant) {
       mechant.move_left();
     } 
   }
-  else if (c == 4) {
+  else if (c == 6) {
     
     if (mechant.Pos_y != window_right) {
       // on modifie la position du curseur à la position (xcursor, ycursor+1)
       mechant.move_right();
     }
   }
-  else if (c ==3) {
+  else if (c ==2) {
     
 
     if (mechant.Pos_x != window_bottom) {
@@ -364,7 +364,7 @@ void move_mechant (Hero& hero,Enemy& mechant) {
       mechant.move_up();
     } 
   }
-  else if (c == 2) {
+  else if (c == 8) {
    
     if (mechant.Pos_x != window_top) {
       // on bouge le curseur à la position (xcursor-1, ycursor)
