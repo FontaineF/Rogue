@@ -474,6 +474,7 @@ void play (char classe) {
   Hero hero(classe);
   hero.initialiser();
   Enemy tresor('t',window_bottom-5,window_right-5);
+  tresor.initialiser();
   Enemy serpent('s',15,15);
   serpent.initialiser();
   Enemy zombie('z', 12,26);
@@ -539,7 +540,7 @@ void play (char classe) {
           affrontement(hero,e);
         }
       }
-      if (tresor.Hits==0){
+      if (entites[3].Hits<=0){
         print_victoire(hero);
 
       }

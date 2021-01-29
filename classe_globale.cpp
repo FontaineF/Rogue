@@ -60,7 +60,7 @@ class Enemy : public Alive{
                 this->Str = 3;
                 this->Armor = 0;
                 this->energie=0;
-                this->cout_mouvement=2;
+                this->cout_mouvement=3;
             }
 
             if(c=='v'){                  //Vampire: général enemi
@@ -69,7 +69,7 @@ class Enemy : public Alive{
                 this->Str = 5;
                 this->Armor = 1;
                 this->energie=1;
-                this->cout_mouvement=1;
+                this->cout_mouvement=2;
             } 
             if(c=='t'){
                 this->Hits = 1;
