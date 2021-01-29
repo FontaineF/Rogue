@@ -207,7 +207,7 @@ void init () {
   // On délimite notre playground n'importe comment dans cet exemple
   window_left = 1;
   window_top = 2;
-  window_bottom = window_bottom - 15;
+  window_bottom = 15;//window_bottom - 15;
   window_right = window_right - 15;
 
 
@@ -333,13 +333,20 @@ void play () {
 
   Hero hero;
 
-  Enemy serpent('s',15,15);
+  Enemy entites[3];
+  Enemy serpent('s',15,10);
+  Enemy zombie('z', 25,7);
+  Enemy vampire('v',45,13);
+
 
   // On affiche le héro.
   affiche(hero.Pos_x, hero.Pos_y, hero.Name);
 
   // on affiche une bébête
-  affiche(serpent.Pos_x, serpent.Pos_y, serpent.Name);
+  for(Enemy e : entites){
+    affiche(e.Pos_x, e.Pos_y, e.Name);
+  }
+  //affiche(serpent.Pos_x, serpent.Pos_y, serpent.Name);
 
   print_message("Welcome to our brave hero !", hero);
   debug_print_hero_position(hero);
@@ -352,6 +359,16 @@ void play () {
     if (is_direction(c)) {
       // Si le caractère est une direction en bouge le héro.
       move(c, hero);
+      for(Enemy e : entites){
+        affrontement(hero,e);
+        if(hero.Hits < 1){
+          print_message("Vous êtes mort.", hero);
+        }
+      }
+      for(Enemy e : entites){
+        move_mechant(hero,e);
+        affrontement(hero,e);
+      }
     } else {
       // Et là le caractère peut être des tas d'autres choses !
       // monstres qu'il faut combattre, objet magique qu'il faut
