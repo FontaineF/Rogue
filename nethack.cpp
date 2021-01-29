@@ -163,11 +163,11 @@ void print_pv (Alive& hero, int color_pair = RED) {
   attron(COLOR_PAIR(color_pair));
   // move déplace le curseur à la position du message en ligne colonne
   // (ici ligne xmsg, colonne ymsg)
-  move(0, 50);
+  move(25, 80);
   // On affiche la ligne blanche (pour effacer le message précédent).
   addstr(white_line);
   // On revient à la position du message.
-  move(0, 50);
+  move(25, 80);
   // On affiche le message.
   std::string hits = std::to_string(hero.Hits);
   std::string max_hits = std::to_string(hero.max_Hits);
