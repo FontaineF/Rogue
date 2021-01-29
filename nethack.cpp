@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
-#include "la_chasse.cpp"
+//#include "la_chasse.cpp"
 #include "classe_globale.cpp"
 //#include "Class_Hero.cpp"
 //#include "enemy.cpp"
 //#include "alive.cpp"
+
+#include <vector>
 
 // Attention ce code est très basique et très mal structuré: des
 // variables globales et des fonctions globales là où on attendrait
@@ -313,6 +315,23 @@ void move (char c, Alive& hero) {
   debug_print_hero_position(hero);
 }
 
+
+int la_chasse(Hero hero, Enemy ennemi){
+    int x=hero.Pos_x - ennemi.Pos_x;
+    int y=hero.Pos_y - ennemi.Pos_y;
+    if (x*x>y*y){
+        if (x<0){return 4;}
+        else {return 5;}
+
+    }
+    else {
+        if (y<0){return 3;}
+        else{return 2;} 
+    }
+
+}
+
+
 void move_mechant (Hero& hero,Enemy& mechant) {
   // On affiche un step pour effacer le héro de la position qu'il va
   // quitter.
@@ -357,6 +376,33 @@ void move_mechant (Hero& hero,Enemy& mechant) {
 
 }
 
+
+void bagarre(Hero& heros, Enemy& mechant){
+
+    while((mechant.Hits > 0) and (heros.Hits > 0)){
+        mechant.prendre_un_coup(heros);
+        if (mechant.Hits > 0){
+            heros.prendre_un_coup(mechant);
+        }
+    }
+}
+
+void affrontement(Hero& h, Enemy& e){
+    int x_h = h.Pos_x;
+    int y_h = h.Pos_y;
+    int x_e = e.Pos_x;
+    int y_e = e.Pos_y;
+
+    int diff_x = x_h - x_e;
+    int diff_y = y_h - y_e;
+
+    if((diff_x==0 and (-1 < diff_y < 1)) or (diff_y==0 and (-1 < diff_x < 1))){
+        bagarre(h,e);
+    }
+
+}
+
+
 // ON JOUE
 // =======
 // Retourne vrai si le caractère c est une direction.
@@ -378,20 +424,25 @@ void play () {
 
   Hero hero;
 
-  Enemy entites[3];
-  Enemy serpent('s',15,10);
-  Enemy zombie('z', 25,7);
-  Enemy vampire('v',45,13);
+  Enemy serpent('s',15,15);
+  Enemy zombie('z', 12,26);
+  Enemy vampire('v',5,47);
+  std::vector<Enemy> entites{serpent,zombie,vampire};
+
 
 
   // On affiche le héro.
   affiche(hero.Pos_x, hero.Pos_y, hero.Name);
 
   // on affiche une bébête
+  
   for(Enemy e : entites){
     affiche(e.Pos_x, e.Pos_y, e.Name);
   }
+  
   //affiche(serpent.Pos_x, serpent.Pos_y, serpent.Name);
+  //affiche(zombie.Pos_x, zombie.Pos_y, zombie.Name);
+  //affiche(vampire.Pos_x, vampire.Pos_y, vampire.Name);
 
   print_message("Welcome to our brave hero !", hero);
   debug_print_hero_position(hero);
@@ -404,6 +455,7 @@ void play () {
     if (is_direction(c)) {
       // Si le caractère est une direction en bouge le héro.
       move(c, hero);
+      /*
       for(Enemy e : entites){
         affrontement(hero,e);
         if(hero.Hits < 1){
@@ -414,6 +466,7 @@ void play () {
         move_mechant(hero,e);
         affrontement(hero,e);
       }
+      */
     } else {
       // Et là le caractère peut être des tas d'autres choses !
       // monstres qu'il faut combattre, objet magique qu'il faut
