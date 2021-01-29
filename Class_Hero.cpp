@@ -44,6 +44,11 @@ class Hero : public Alive
 };
 
 int main(){
-    Hero Hero1();
+    Hero* pHero1 = new Hero();
+    Hero Hero2;
+    pHero1->move_up();
+    pHero1->move_up();
+    cout<< pHero1->is_neighbour(Hero2)<<'\n';
+    delete pHero1;
     return 0;
 }
