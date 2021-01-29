@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-
+#include "la_chasse.cpp"
 #include "classe_globale.cpp"
 //#include "Class_Hero.cpp"
 //#include "enemy.cpp"
@@ -262,6 +262,7 @@ void move (char c, Alive& hero) {
   
   // Le héro est en noir.
   int color = BLACK;
+  
 
   if (c == LEFT) {
     print_message("the hero is heading left", hero);
@@ -310,6 +311,50 @@ void move (char c, Alive& hero) {
   // pour debugger on affiche la position du héro en bleu sur la
   // seconde ligne
   debug_print_hero_position(hero);
+}
+
+void move_mechant (Hero& hero,Enemy& mechant) {
+  // On affiche un step pour effacer le héro de la position qu'il va
+  // quitter.
+  affiche(mechant.Pos_x, mechant.Pos_y, step);
+  
+  // Le héro est en noir.
+  int color = BLACK;
+  int c=la_chasse(hero,mechant);
+
+  if (c == 4) {
+    
+    if (mechant.Pos_y != window_left) {
+      // le mouvement est possible
+      // on bouge le curseur à la position (xcursor, ycursor-1)
+      mechant.move_left();
+    } 
+  }
+  else if (c == 5) {
+    
+    if (mechant.Pos_y != window_right) {
+      // on modifie la position du curseur à la position (xcursor, ycursor+1)
+      mechant.move_right();
+    }
+  }
+  else if (c ==3) {
+    
+
+    if (mechant.Pos_x != window_bottom) {
+      // on modifie la position du curseur à la position (xcursor+1, ycursor)
+      mechant.move_up();
+    } 
+  }
+  else if (c == 2) {
+   
+    if (mechant.Pos_x != window_top) {
+      // on bouge le curseur à la position (xcursor-1, ycursor)
+      mechant.move_down();
+    } 
+  }
+  // On affiche le héro à la position (xcursor, ycursor)
+  affiche(mechant.Pos_x, mechant.Pos_y, mechant.Name, color);
+
 }
 
 // ON JOUE
