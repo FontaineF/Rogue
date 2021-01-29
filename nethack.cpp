@@ -335,6 +335,7 @@ int la_chasse(Hero hero, Enemy ennemi){
 void move_mechant (Hero& hero,Enemy& mechant) {
   // On affiche un step pour effacer le héro de la position qu'il va
   // quitter.
+  if (mechant.energie>0){
   affiche(mechant.Pos_x, mechant.Pos_y, step);
   
   // Le héro est en noir.
@@ -373,7 +374,9 @@ void move_mechant (Hero& hero,Enemy& mechant) {
   }
   // On affiche le héro à la position (xcursor, ycursor)
   affiche(mechant.Pos_x, mechant.Pos_y, mechant.Name, color);
-
+  mechant.energie--;
+  }
+  else{mechant.energie++;}
 }
 
 
@@ -385,7 +388,7 @@ void bagarre(Hero& heros, Enemy& mechant){
             heros.prendre_un_coup(mechant);
         }
     }
-    if(mechant.Hits ==0){affiche(mechant.Pos_x, mechant.Pos_y, step);
+    if(mechant.Hits <=0){affiche(mechant.Pos_x, mechant.Pos_y, step);
   }
 }
 
