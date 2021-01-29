@@ -2,6 +2,7 @@
 
 class Alive{
     public:
+        
         char Name;
         int Hits;
         int max_Hits;
@@ -39,7 +40,8 @@ class Enemy : public Alive{
     public:
         Enemy(char c, int x, int y): Alive(){this->Name = c; this->Pos_x = x; this->Pos_y = y;};
         // Enemy enemy1{'s',10,10}
-        int energie=1;
+        int energie;
+        int cout_mouvement;
         void initialiser(){
             char c;
             c = this->Name;
@@ -48,6 +50,8 @@ class Enemy : public Alive{
                 this->max_Hits = 3;
                 this->Str = 2;
                 this->Armor = 0;
+                this->energie=1;
+                this->cout_mouvement=1;
             }
 
             if(c=='z'){                  //Zombie: enemi basique
@@ -55,6 +59,8 @@ class Enemy : public Alive{
                 this->max_Hits = 8;
                 this->Str = 3;
                 this->Armor = 0;
+                this->energie=0;
+                this->cout_mouvement=2;
             }
 
             if(c=='v'){                  //Vampire: général enemi
@@ -62,6 +68,16 @@ class Enemy : public Alive{
                 this->max_Hits = 15;
                 this->Str = 5;
                 this->Armor = 1;
+                this->energie=1;
+                this->cout_mouvement=1;
+            } 
+            if(c=='t'){
+                this->Hits = 1;
+                this->max_Hits = 1;
+                this->Str = 0;
+                this->Armor = 0;
+                this->energie=-999;
+                this->cout_mouvement=1;
             } 
         }
 };

@@ -400,7 +400,7 @@ void move_mechant (Hero& hero,Enemy& mechant) {
   }
   // On affiche le héro à la position (xcursor, ycursor)
   affiche(mechant.Pos_x, mechant.Pos_y, mechant.Name, color);
-  mechant.energie--;
+  mechant.energie=mechant.energie-mechant.cout_mouvement;
   }
   else{mechant.energie++;}
 }
@@ -455,14 +455,14 @@ void play (char classe) {
 
   Hero hero(classe);
   hero.initialiser();
-
+  Enemy tresor('t',window_bottom-5,window_right-5);
   Enemy serpent('s',15,15);
   serpent.initialiser();
   Enemy zombie('z', 12,26);
   zombie.initialiser();
   Enemy vampire('v',5,47);
   vampire.initialiser();
-  std::vector<Enemy> entites{serpent,zombie,vampire};
+  std::vector<Enemy> entites{serpent,zombie,vampire,tresor};
 
 
 
@@ -511,6 +511,7 @@ void play (char classe) {
           delete white_line;
           endwin();
           exit(1);
+         
           }
         }
       }
@@ -520,6 +521,12 @@ void play (char classe) {
           affrontement(hero,e);
         }
       }
+      if (tresor.Hits==0){
+        print_victoire(hero);
+
+      }
+
+      
       
     } else {
       // Et là le caractère peut être des tas d'autres choses !
