@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include <alive.cpp>
+
 // Attention ce code est très basique et très mal structuré: des
 // variables globales et des fonctions globales là où on attendrait
 // une structure de classe avec des attributs (éventuellement
@@ -232,7 +234,7 @@ const char step = ' ';
 // (xcursor, ycursor) après le mouvement, par exemple 'LEFT', il va à
 // la nouvelle position (xcursor, ycursor-1) - si c'est possible -
 
-void move (char c) {
+void move (char c, Alive entity) {
   // On affiche un step pour effacer le héro de la position qu'il va
   // quitter.
   affiche(xcursor, ycursor, step);
