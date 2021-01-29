@@ -1,7 +1,10 @@
 #include <iostream>
 #include <string>
 
-#include <alive.cpp>
+#include "classe_globale.cpp"
+//#include "Class_Hero.cpp"
+//#include "enemy.cpp"
+//#include "alive.cpp"
 
 // Attention ce code est très basique et très mal structuré: des
 // variables globales et des fonctions globales là où on attendrait
@@ -37,12 +40,16 @@
 
 // la position du '@' qui est aussi la position du curseur de votre
 // terminal
+/*
 int xcursor = 3; // ligne
 int ycursor = 4; // colonne
+*/
 
 // un exemple de héro et d'une bébête quelconque
+/*
 const char hero = '@';
 const char bebete = 'E';
+*/
 
 // LE TERMINAL
 // ===========
@@ -116,6 +123,7 @@ int ymsg = 0;
 // chaine de caractères blancs, qu'on crée avec la fonction
 // suivante. Faites mieux !
 char* white_line;
+
 char* init_white_line (int size) {
   char* buff = new char [size];
   for (int i = 0; i < size; ++i)
@@ -128,7 +136,7 @@ char* init_white_line (int size) {
 // position de la ligne de message décidée auparavant (remarquez
 // l'horrible utilisation de variables globales dans cette
 // fonction. Il faut faire une structure de classes.
-void print_message (const char* msg, int color_pair = YELLOW) {
+void print_message (const char* msg,  Alive& hero, int color_pair = YELLOW) {
   // on charge la couleur color_pair.
   attron(COLOR_PAIR(color_pair));
   // move déplace le curseur à la position du message en ligne colonne
@@ -141,23 +149,23 @@ void print_message (const char* msg, int color_pair = YELLOW) {
   // On affiche le message.
   addstr(msg);
   // On retourne à la position du héro.
-  move(xcursor, ycursor);
+  move(hero.Pos_x, hero.Pos_y);
   // On enlève la couleur choisie.
   attroff(COLOR_PAIR(color_pair));
   refresh();
 }
 
-void debug_print_hero_position () {
+void debug_print_hero_position (Alive& hero) {
   std::string str = "the hero is at position line ";
-  str += std::to_string(xcursor);
+  str += std::to_string(hero.Pos_x);
   str += ", column ";
-  str += std::to_string(ycursor);
+  str += std::to_string(hero.Pos_y);
   attron(COLOR_PAIR(BLUE));
   move(1, 0);
   addstr(white_line);
   move(1, 0);
   addstr(str.c_str());
-  move(xcursor, ycursor);
+  move(hero.Pos_x, hero.Pos_y);
   attroff(COLOR_PAIR(BLUE));
   refresh();
 }
@@ -213,6 +221,16 @@ void init () {
 // affiche le caractère thing et, comme l'affichage fait avancer le
 // curseur, on le remet à la position initiale move it back to
 // xcursor, ycursor
+/*
+void affiche (Alive& entity, int color_pair = 0) {
+  attron(COLOR_PAIR(color_pair));
+  move(entity.Pos_x, entity.Pos_y);
+  addch(entity.Name);
+  move(entity.Pos_x, entity.Pos_y);
+  attroff(COLOR_PAIR(color_pair));
+  refresh();
+}
+*/
 void affiche (int xpos, int ypos, char thing, int color_pair = 0) {
   attron(COLOR_PAIR(color_pair));
   move(xpos, ypos);
@@ -234,61 +252,61 @@ const char step = ' ';
 // (xcursor, ycursor) après le mouvement, par exemple 'LEFT', il va à
 // la nouvelle position (xcursor, ycursor-1) - si c'est possible -
 
-void move (char c, Alive entity) {
+void move (char c, Alive& hero) {
   // On affiche un step pour effacer le héro de la position qu'il va
   // quitter.
-  affiche(xcursor, ycursor, step);
+  affiche(hero.Pos_x, hero.Pos_y, step);
   
   // Le héro est en noir.
   int color = BLACK;
 
   if (c == LEFT) {
-    print_message("the hero is heading left");
-    if (ycursor != window_left) {
+    print_message("the hero is heading left", hero);
+    if (hero.Pos_y != window_left) {
       // le mouvement est possible
       // on bouge le curseur à la position (xcursor, ycursor-1)
-      ycursor-=1;
+      hero.move_left();
     } else {
-      print_message("the hero reached the playground left side");
+      print_message("the hero reached the playground left side", hero);
       color = RED; // il voit rouge
     }
   }
   else if (c == RIGHT) {
-    print_message("the hero is heading right");
-    if (ycursor != window_right) {
+    print_message("the hero is heading right", hero);
+    if (hero.Pos_y != window_right) {
       // on modifie la position du curseur à la position (xcursor, ycursor+1)
-      ycursor+=1;
+      hero.move_right();
     } else {
-      print_message("the hero reached the playground right side");
+      print_message("the hero reached the playground right side", hero);
       color = CYAN; // il est cyanosé 
     }
   }
   else if (c == BOTTOM) {
-    print_message("the hero is heading down");
+    print_message("the hero is heading down", hero);
 
-    if (xcursor != window_bottom) {
+    if (hero.Pos_x != window_bottom) {
       // on modifie la position du curseur à la position (xcursor+1, ycursor)
-      xcursor+=1;
+      hero.move_up();
     } else {
-      print_message("the hero reached the playground bottom side");
+      print_message("the hero reached the playground bottom side", hero);
       color = YELLOW; // il est malade
     }
   }
   else if (c == TOP) {
-    print_message("the hero is heading up");
-    if (xcursor != window_top) {
+    print_message("the hero is heading up", hero);
+    if (hero.Pos_x != window_top) {
       // on bouge le curseur à la position (xcursor-1, ycursor)
-      xcursor-=1;
+      hero.move_down();
     } else {
-      print_message("the hero reached the playground top side");
+      print_message("the hero reached the playground top side", hero);
       color = GREEN; // il a peur
     }
   }
   // On affiche le héro à la position (xcursor, ycursor)
-  affiche(xcursor, ycursor, hero, color);
+  affiche(hero.Pos_x, hero.Pos_y, hero.Name, color);
   // pour debugger on affiche la position du héro en bleu sur la
   // seconde ligne
-  debug_print_hero_position();
+  debug_print_hero_position(hero);
 }
 
 // ON JOUE
@@ -300,23 +318,28 @@ bool is_direction (char c) {
 }
 // On affiche une erreur quand le caractère n'est pas connu, ne pas
 // garder cette fonction, c'est juste pour debugger ce que vous tapez.
-void print_char_error_message(char c) {
+void print_char_error_message(char c, Alive& hero) {
   std::string msg = "the character '";
   msg += c;
   msg += "' is not an action !";
-  print_message(msg.c_str(), RED);
+  print_message(msg.c_str(), hero, RED);
 }
 void play () {
   // On initialise le terminal en ncurses.
   init();
+
+  Hero hero;
+
+  Enemy serpent('s',15,15);
+
   // On affiche le héro.
-  affiche(xcursor, ycursor, hero);
+  affiche(hero.Pos_x, hero.Pos_y, hero.Name);
 
   // on affiche une bébête
-  affiche(10, 7, bebete);
+  affiche(serpent.Pos_x, serpent.Pos_y, serpent.Name);
 
-  print_message("Welcome to our brave hero !");
-  debug_print_hero_position();
+  print_message("Welcome to our brave hero !", hero);
+  debug_print_hero_position(hero);
   char c = '\0';
   // On entre dans une boucle sans fin sauf si le caractère 'q' est
   // entré.
@@ -325,12 +348,12 @@ void play () {
     c = getch();
     if (is_direction(c)) {
       // Si le caractère est une direction en bouge le héro.
-      move(c);
+      move(c, hero);
     } else {
       // Et là le caractère peut être des tas d'autres choses !
       // monstres qu'il faut combattre, objet magique qu'il faut
       // ramasser etc.
-      print_char_error_message(c);
+      print_char_error_message(c, hero);
     }
   }
   // Vous devez terminer curses proprement sinon votre terminal sera

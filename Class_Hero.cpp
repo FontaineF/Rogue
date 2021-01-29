@@ -43,6 +43,7 @@ class Hero : public Alive
     int Gold;
 };
 
+/*
 int main(){
     Hero* pHero1 = new Hero();
     Hero Hero2;
@@ -52,3 +53,4 @@ int main(){
     delete pHero1;
     return 0;
 }
+*/

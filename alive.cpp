@@ -1,7 +1,10 @@
 #include<iostream>
 
+#ifndef ALIVE
+#define ALIVE
+
 class Alive{
-    protected:
+    public:
         char Name;
         int Hits;
         int max_Hits;
@@ -10,7 +13,7 @@ class Alive{
         int Pos_x;
         int Pos_y;
 
-    public:
+    //public:
 
         void move_right(){
             Pos_x++;
@@ -37,3 +40,6 @@ class Alive{
             return ((x_2-x_1)*(x_2-x_1)==1 or (y_2-y_1)*(y_2-y_1) == 1);
         }
 };
+
+
+#endif
