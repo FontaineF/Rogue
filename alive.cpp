@@ -32,6 +32,14 @@ class Alive{
             int damage_taken=opponent.Str-this->Armor;
             if (damage_taken>0){Hits=Hits-damage_taken;}
         };
+        bool is_neighbour(Alive Character2){
+            int x_1 = this->Pos_x;
+            int y_1 = this->Pos_y;
+            int x_2 = Character2.Pos_x;
+            int y_2 = Character2.Pos_y;
+            return ((x_2-x_1)*(x_2-x_1)==1 or (y_2-y_1)*(y_2-y_1) == 1);
+        }
 };
+
 
 #endif
