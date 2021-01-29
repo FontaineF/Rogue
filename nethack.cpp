@@ -45,7 +45,7 @@ const char bebete = 'E';
 // LE TERMINAL
 // ===========
 
-// Le terminal est vottre playground. Il est constituée d'un nombre de
+// Le terminal est votre playground. Il est constituée d'un nombre de
 // lignes et de colonnes (une sorte de matrice). CEs deux valeurs vous
 // seront données par une fonction de ncurses.
 
