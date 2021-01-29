@@ -207,9 +207,9 @@ void init () {
   getmaxyx(stdscr, window_bottom, window_right);
 
   // On délimite notre playground n'importe comment dans cet exemple
-  window_left = 1;
-  window_top = 2;
-  window_bottom = 15;//window_bottom - 15;
+  window_left = 2;
+  window_top = 3;
+  window_bottom = 20;//window_bottom - 15;
   window_right = window_right - 15;
 
 
@@ -396,7 +396,7 @@ void affrontement(Hero& h, Enemy& e){
     int diff_x = x_h - x_e;
     int diff_y = y_h - y_e;
 
-    if((diff_x==0 and (diff_y * diff_y < 1)) or (diff_y==0 and (diff_x * diff_x < 1))){
+    if((diff_x==0 and (diff_y * diff_y <= 1)) or (diff_y==0 and (diff_x * diff_x <= 1))){
         bagarre(h,e);
     }
 
@@ -443,6 +443,9 @@ void play () {
   for(Enemy& e : entites){
     affiche(e.Pos_x, e.Pos_y, e.Name);
   }
+
+  //for(int i = window_left; i<window_right)
+  affiche(2,3,'|');
   
   //affiche(serpent.Pos_x, serpent.Pos_y, serpent.Name);
   //affiche(zombie.Pos_x, zombie.Pos_y, zombie.Name);
