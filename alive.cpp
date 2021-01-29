@@ -12,10 +12,21 @@ class Alive{
 
     public:
 
-        void move_right();
-        void move_left();
-        void move_up();
-        void move_down();
+        void move_right(){
+            Pos_x++;
+        };
+        void move_left(){
+            Pos_x--;
+        };
+        void move_up(){
+            Pos_y++;
+        };
+        void move_down(){
+            Pos_y--;
+        };
 
-        void prendre_un_coup(Alive);
+        void prendre_un_coup(const Alive opponent){
+            int damage_taken=opponent.Str-this->Armor;
+            if (damage_taken>0){Hits=Hits-damage_taken;}
+        };
 };
