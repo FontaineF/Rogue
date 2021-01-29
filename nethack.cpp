@@ -210,6 +210,9 @@ void init () {
   window_bottom = window_bottom - 15;
   window_right = window_right - 15;
 
+
+
+
   white_line = init_white_line(window_right+1);
 }
 
