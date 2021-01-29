@@ -356,7 +356,7 @@ void move_mechant (Hero& hero,Enemy& mechant) {
       mechant.move_right();
     }
   }
-  else if (c ==3) {
+  else if (c ==2) {
     
 
     if (mechant.Pos_x != window_bottom) {
@@ -364,7 +364,7 @@ void move_mechant (Hero& hero,Enemy& mechant) {
       mechant.move_up();
     } 
   }
-  else if (c == 2) {
+  else if (c == 3) {
    
     if (mechant.Pos_x != window_top) {
       // on bouge le curseur à la position (xcursor-1, ycursor)
