@@ -39,7 +39,7 @@ class Enemy : public Alive{
     public:
         Enemy(char c, int x, int y): Alive(){this->Name = c; this->Pos_x = x; this->Pos_y = y;};
         // Enemy enemy1{'s',10,10}
-
+        int energie=1;
         void initialiser(){
             char c;
             c = this->Name;

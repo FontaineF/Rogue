@@ -157,6 +157,32 @@ void print_message (const char* msg,  Alive& hero, int color_pair = YELLOW) {
   refresh();
 }
 
+
+void print_pv (Alive& hero, int color_pair = RED) {
+  // on charge la couleur color_pair.
+  attron(COLOR_PAIR(color_pair));
+  // move déplace le curseur à la position du message en ligne colonne
+  // (ici ligne xmsg, colonne ymsg)
+  move(0, 50);
+  // On affiche la ligne blanche (pour effacer le message précédent).
+  addstr(white_line);
+  // On revient à la position du message.
+  move(0, 50);
+  // On affiche le message.
+  std::string hits = std::to_string(hero.Hits);
+  std::string max_hits = std::to_string(hero.max_Hits);
+  const char* tot = (hits+"/"+max_hits).c_str();
+  addstr(tot);
+  // On retourne à la position du héro.
+  move(hero.Pos_x, hero.Pos_y);
+  // On enlève la couleur choisie.
+  attroff(COLOR_PAIR(color_pair));
+  refresh();
+}
+
+
+
+
 void debug_print_hero_position (Alive& hero) {
   std::string str = "the hero is at position line ";
   str += std::to_string(hero.Pos_x);
@@ -475,6 +501,7 @@ void play (char classe) {
     if (is_direction(c)) {
       // Si le caractère est une direction en bouge le héro.
       move(c, hero);
+      print_pv(hero);
       
       for(Enemy& e : entites){
         if(e.Hits>0){
