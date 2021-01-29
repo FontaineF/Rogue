@@ -5,7 +5,8 @@ class Enemy : public Alive{
     protected:
 
     public:
-        Enemy(char c, int x, int y): Alive(){this->Name = c;};
+        Enemy(char c, int x, int y): Alive(){this->Name = c; this->Pos_x = x; this->Pos_y = y;};
+        // Enemy enemy1{'s',10,10}
 
         void initialiser(){
             char c;
@@ -29,7 +30,6 @@ class Enemy : public Alive{
                 this->max_Hits = 15;
                 this->Str = 5;
                 this->Armor = 3;
-            }
-            
+            } 
         }
 };
