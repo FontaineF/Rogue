@@ -444,8 +444,16 @@ void play () {
     affiche(e.Pos_x, e.Pos_y, e.Name);
   }
 
-  //for(int i = window_left; i<window_right)
-  affiche(2,3,'|');
+  for(int i = window_left; i<window_right; i++){
+    affiche(window_top-1,i,'_');
+    affiche(20+1,i,'_');
+  }
+  for(int j = window_top; j<22; j++){
+    affiche(j,window_right+1,'|');
+    affiche(j,window_left-1,'|');
+  }
+
+  //affiche(2,3,'|');
   
   //affiche(serpent.Pos_x, serpent.Pos_y, serpent.Name);
   //affiche(zombie.Pos_x, zombie.Pos_y, zombie.Name);
