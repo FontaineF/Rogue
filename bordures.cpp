@@ -5,5 +5,9 @@ int window_top = 3;
 
 char map[17][98];
 for(int i = 0; i<17; i++){
-    for(int j = 0; j<98; j++)
+    for(int j = 0; j<98; j++){
+        map[i][j] = ' '
+    }
 }
+
+for(int k = 5

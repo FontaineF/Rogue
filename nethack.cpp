@@ -180,6 +180,24 @@ void print_pv (Alive& hero, int color_pair = RED) {
   refresh();
 }
 
+void print_victoire(Alive& hero, int color_pair = CYAN){
+  // on charge la couleur color_pair.
+  attron(COLOR_PAIR(color_pair));
+  // move déplace le curseur à la position du message en ligne colonne
+  // (ici ligne xmsg, colonne ymsg)
+  move(26, 70);
+  // On affiche la ligne blanche (pour effacer le message précédent).
+  addstr(white_line);
+  // On revient à la position du message.
+  move(26, 70);
+  // On affiche le message.
+  addstr("Vous avez gagné !!! (appuyez sur q pour quitter)");
+  // On retourne à la position du héro.
+  move(hero.Pos_x, hero.Pos_y);
+  // On enlève la couleur choisie.
+  attroff(COLOR_PAIR(color_pair));
+  refresh();
+}
 
 
 
