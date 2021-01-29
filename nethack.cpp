@@ -455,7 +455,7 @@ void play () {
     if (is_direction(c)) {
       // Si le caractère est une direction en bouge le héro.
       move(c, hero);
-      /*
+      /*                                                                                                                                                                                                                            
       for(Enemy e : entites){
         affrontement(hero,e);
         if(hero.Hits < 1){
