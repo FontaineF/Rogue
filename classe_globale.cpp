@@ -27,10 +27,10 @@ class Alive{
 
         void prendre_un_coup(const Alive opponent){
             int damage_taken=opponent.Str-this->Armor;
-            if (damage_taken>0){Hits=Hits-damage_taken;}
+            if (damage_taken>0){this->Hits=(this->Hits-damage_taken);}
         };
 
-        
+
 };
 
 class Enemy : public Alive{
@@ -43,21 +43,21 @@ class Enemy : public Alive{
         void initialiser(){
             char c;
             c = this->Name;
-            if(c='s'){                  //Snake: enemi faible
+            if(c=='s'){                  //Snake: enemi faible
                 this->Hits = 3;
                 this->max_Hits = 3;
                 this->Str = 2;
                 this->Armor = 0;
             }
 
-            if(c='z'){                  //Zombie: enemi basique
+            if(c=='z'){                  //Zombie: enemi basique
                 this->Hits = 6;
                 this->max_Hits = 6;
                 this->Str = 3;
                 this->Armor = 0;
             }
 
-            if(c='v'){                  //Vampire: général enemi
+            if(c=='v'){                  //Vampire: général enemi
                 this->Hits = 15;
                 this->max_Hits = 15;
                 this->Str = 5;
@@ -80,21 +80,21 @@ class Hero : public Alive
     void initialiser(){
             char c;
             c = this->Name;
-            if(c='b'){                  //Barbare : Force haute mais peu de PV
+            if(c=='b'){                  //Barbare : Force haute mais peu de PV
                 this->Hits = 7;
                 this->max_Hits = 7;
                 this->Str = 7;
                 this->Armor = 0;
             }
 
-            if(c='c'){                  //Chevalier : Force moyenne PV moyen
+            if(c=='c'){                  //Chevalier : Force moyenne PV moyen
                 this->Hits = 10;
                 this->max_Hits = 10;
                 this->Str = 5;
                 this->Armor = 2;
             }
 
-            if(c='g'){                  //Geant : Force faible mais PV eleve
+            if(c=='g'){                  //Geant : Force faible mais PV eleve
                 this->Hits = 20;
                 this->max_Hits = 20;
                 this->Str = 3;

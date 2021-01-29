@@ -440,7 +440,7 @@ void play () {
 
   // on affiche une bébête
   
-  for(Enemy e : entites){
+  for(Enemy& e : entites){
     affiche(e.Pos_x, e.Pos_y, e.Name);
   }
   
@@ -460,7 +460,7 @@ void play () {
       // Si le caractère est une direction en bouge le héro.
       move(c, hero);
       
-      for(Enemy e : entites){
+      for(Enemy& e : entites){
         if(e.Hits>0){
           affrontement(hero,e);
           if(hero.Hits < 1){
@@ -468,7 +468,7 @@ void play () {
           }
         }
       }
-      for(Enemy e : entites){
+      for(Enemy& e : entites){
         if(e.Hits>0){
           move_mechant(hero,e);
           affrontement(hero,e);
